@@ -1,2 +1,2 @@
-# Algo
-Algo for special football robots for RobocupSSL
+# MLscripts
+Matlab scripts for special football robots for RobocupSSL
