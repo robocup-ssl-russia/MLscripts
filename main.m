@@ -1,7 +1,7 @@
 %% MAIN START HEADER
 global Blues Yellows Balls Rules RP PAR Modul
 if isempty(RP)
-    addpath tools RPtools MODUL
+    addpath tools RPtools MODUL algorithms
 end
 %
 mainHeader();
@@ -30,6 +30,9 @@ PAR.RGate.X=2000;
 G=[2000,0];
 B=RP.Ball.z;
 RP.Blue(9).rul=GOcircle(RP.Blue(9),B,angV(G-B));
+
+% RP.Blue(9).rul = MoveToPoint(RP.Blue(9), G);
+
 % G=[2000,0];
 % RP.Yellow(1).rul=SCRIPT_GoalKeeper(RP.Yellow(1),RP.Ball,-G);
 % RP.Yellow(2).rul=SCRIPT_Atack(RP.Yellow(2),RP.Ball,G,[500,-500]);
