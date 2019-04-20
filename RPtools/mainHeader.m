@@ -12,8 +12,8 @@
 %       BluesSpeed: [12x1 double] %—корости —иних
 %       BallsSpeed: 0             %—корость м€ча
 %         Ballsang: 0             %”гол направлени€ м€ча
-%            Blues: [12x4 double] %¬ход€щий массив синих
-%          Yellows: [12x4 double] %¬ход€щий массив жЄлтых
+%            Blues: [16x4 double] %¬ход€щий массив синих
+%          Yellows: [16x4 double] %¬ход€щий массив жЄлтых
 %            Balls: [0 0 0]       %¬ход€щий массив м€чей
 %            Rules: [4x7 double]  %»сход€щий массив управлени€
 %             Ball: [1x1 struct]  %—труктура м€ча
@@ -69,12 +69,12 @@ end
 % --- Blues ----
 global Blues;
 if isempty(Blues)
-    Blues=zeros(12,4);
+    Blues=zeros(16,4);
 end
-% --- Blues ----
+% --- Yellows ----
 global Yellows;
 if isempty(Yellows)
-   Yellows=zeros(12,4);
+   Yellows=zeros(16,4);
 end
 % --- Rules дл€ BT ---
 global Rules;

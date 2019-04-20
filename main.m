@@ -3,21 +3,15 @@
 global Blues Yellows Balls Rules RP PAR Modul activeAlgorithm obstacles
 
 if isempty(RP)
-
     addpath tools RPtools MODUL
-
 end
-
 %
 
 mainHeader();
-
-MAP(); 
+%MAP();
 
 if (RP.Pause) 
-
     return;
-
 end
 
 zMain_End=RP.zMain_End;
@@ -28,26 +22,15 @@ zMain_End=RP.zMain_End;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-PAR.HALF_FIELD=-1;
-
-PAR.MAP_X=4000;
-
-PAR.MAP_Y=3000;
-
-PAR.RobotSize=200;
-
-PAR.KICK_DIST=200;
-
-PAR.DELAY=0.15;
-
-PAR.WhellR=5;
-
-
-
-PAR.LGate.X=-2000;
-
-PAR.RGate.X=2000;
-
+%PAR.HALF_FIELD=-1;
+%PAR.MAP_X=4000;
+%PAR.MAP_Y=3000;
+%PAR.RobotSize=200;
+%PAR.KICK_DIST=200;
+%PAR.DELAY=0.15;
+%PAR.WhellR=5;
+%PAR.LGate.X=-2000;
+%PAR.RGate.X=2000;
 %PAR.BorotArm=225;
 
 
