@@ -1,7 +1,7 @@
 %PAUSE
 %Создаёт и отменяет паузу 
 %Во время паузы Rule не передаёт данные
-global RP Rules;
+global RP Rules outBuffer bufferEmptyPosition;
 
 %% Пересборка управляющей функции
 %pcode main.m;
@@ -27,6 +27,12 @@ if (RP.Pause==1)
 %     Rules(4,:)=[1,0,0,0,0,0,0];
 else
     Rules(1,:)=[2,1,0,0,0,0,0];
+    %---------------------------------------------------
+    outBuffer = zeros(1, 16);
+    if (isempty(bufferEmptyPosition))
+        bufferEmptyPosition = 1;
+    end
+    %---------------------------------------------------
 end
 %% Использование main
 RP.zMain_End=true;

@@ -1,5 +1,5 @@
 %Movement of the robot Agent to the point G.
-%Stop in the vicinity of the ball and turn to it.
+%Stop in the vicinity of the point and turn to it.
 
 function rul = MoveToPoint(agent, G) 
 angFinal = atan2((G(2) - agent.y), (G(1) - agent.x));
