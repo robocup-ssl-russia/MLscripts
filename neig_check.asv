@@ -1,0 +1,5 @@
+%% block of neighbour check 
+function rul = neig_check(agent, Opponent, distance)
+if (abs(agent.x-) 
+    rul = Rule(agent,0,0, 1, 0, 0);
+end

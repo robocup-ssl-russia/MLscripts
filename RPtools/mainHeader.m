@@ -52,6 +52,12 @@ if isfield(RP,'zMain_End') && (RP.zMain_End==false) && (RP.inpair==false)
 end
 RP.zMain_End=false;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%experimential part----------------------------------------
+global outBuffer;
+if isempty(outBuffer)
+    outBuffer = zeros(1, 16);
+end
+%----------------------------------------------------------
 %% Data %%
 emptyrul=Crul(0,0,0,0,0);
 %от SSL
@@ -74,6 +80,11 @@ end
 global Rules;
 if isempty(Rules)
     Rules=zeros(4,7);
+end
+
+global activeAlgorithm
+if isempty(activeAlgorithm)
+    activeAlgorithm = 0;
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Разбор входящих данных %%
@@ -215,6 +226,7 @@ for i=1:size(Blues,1)
         RP.Blue(i).v=RP.BluesSpeed(i);
         RP.Blue(i).u=RP.BluesAngSpeed(i);                    
         RP.Blue(i).id=i;
+%       RP.Blue(i).Nrul=7;
         RP.Blue(i).Nrul=RP.pair.Blues(i);
         RP.Blue(i).rul=emptyrul;
         RP.Blue(i).KickAng=0;
