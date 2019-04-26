@@ -1,6 +1,6 @@
 %% MAIN START HEADER
 
-global Blues Yellows Balls Rules RP PAR Modul activeAlgorithm obstacles
+global Blues Yellows Balls FieldInfo Rules RP PAR Modul activeAlgorithm obstacles
 
 if isempty(RP)
     addpath tools RPtools MODUL
