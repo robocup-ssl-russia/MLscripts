@@ -73,12 +73,6 @@ border2 = [2000 1500];
 point1 = [-1.7683   -0.2785] * 1000;
 point2 = [1500 800];
 
-RP.Blue(3).Nrul = 3;
-RP.Blue(2).Nrul = 2;
-RP.Blue(4).Nrul = 4;
-RP.Blue(7).Nrul = 7;
-RP.Blue(8).Nrul = 8;
-
 BlueIDs = [3 5 1 2 9];
 YellowIDs = [3 8];
 
@@ -108,12 +102,6 @@ for k = 1: numel(YellowIDs)
         obstacles(k + BCnt, 3) = radius;
     end
 end
-%{
-RP.Blue(1).Nrul = 1;
-RP.Blue(2).Nrul = 2;
-RP.Blue(3).Nrul = 3;
-RP.Blue(5).Nrul = 5;
-%}
 
 %RP.Blue(4).rul = kickBall(RP.Blue(4), RP.Ball, RP.Blue(7).z, kickBallPreparation());
 %RP.Blue(4).rul = RotateToPID(RP.Blue(4), RP.Ball.z, 3, 10, 0.1, -30, 0.01);

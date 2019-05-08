@@ -64,22 +64,22 @@ emptyrul=Crul(0,0,0,0,0);
 % --- Balls ----
 global Balls;
 if isempty(Balls)   
-    Balls=zeros(1,3);  
+    Balls=zeros(1, 3);  
 end
 % --- Blues ----
 global Blues;
 if isempty(Blues)
-    Blues=zeros(16,4);
+    Blues=zeros(16, 4);
 end
 % --- Yellows ----
 global Yellows;
 if isempty(Yellows)
-   Yellows=zeros(16,4);
+   Yellows=zeros(16, 4);
 end
 % --- Rules для BT ---
 global Rules;
 if isempty(Rules)
-    Rules=zeros(4,7);
+    Rules=zeros(16, 7);
 end
 
 global activeAlgorithm
