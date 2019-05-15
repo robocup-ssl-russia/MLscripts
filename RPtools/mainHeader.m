@@ -15,7 +15,7 @@
 %            Blues: [16x4 double] %Входящий массив синих
 %          Yellows: [16x4 double] %Входящий массив жёлтых
 %            Balls: [0 0 0]       %Входящий массив мячей
-%            Rules: [4x7 double]  %Исходящий массив управления
+%            Rules: [16x13 double]  %Исходящий массив управления
 %             Ball: [1x1 struct]  %Структура мяча
 %             Blue: [1x16 struct] %Структура синих
 %           Yellow: [1x16 struct] %Структура жёлтых
@@ -79,7 +79,7 @@ end
 % --- Rules для BT ---
 global Rules;
 if isempty(Rules)
-    Rules=zeros(16, 7);
+    Rules=zeros(16, 13);
 end
 
 global activeAlgorithm
