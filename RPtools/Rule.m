@@ -1,61 +1,53 @@
-%Rule(Nom,Left,Right,Kick,Sound,Sensor)
-%Rule(Nom,Left,Right,Kick,Sound), Sensor=0;
-%Rule(Nom,Agent) - recommended
-%Rule(Nom,rul) 
-%Размещение нового управления в массиве Rules
-%Добавление 1ого елемента   [1,*,*,...]
+%Rule(Nom, Agent) - recommended
+%Rule(Nom, rul) 
+%Adding new control to Rules array
 
-function Rule(Num, SpeedY, SpeedX, Kick, Sound, Sensor)
-if (nargin == 5)
-    Sensor = 0;
-end
-if (nargin == 2)
-    if isfield(SpeedY,'rul')
-        rul = SpeedY.rul;
-    else
-        rul = SpeedY;
-    end
-    SpeedY = rul.left;
-    SpeedX = rul.right;
-    Kick = rul.kick;    
-    Sound = rul.sound;
-    Sensor = rul.sensor;
+function Rule(Num, Agent)
+if isfield(Agent, 'rul')
+    rul = Agent.rul;
 else
-    %warning('<RP>: old definition Rule(Nom,Left,Right,Kick,Sound,Sensor), not recommended');
-    if (isstruct(SpeedY))
-        error('error using return of function ''Left=rul''. Using rul=funct() and Rule(Nom,rul)');
-    end
+    rul = Agent;
 end
+SpeedY = rul.SpeedY;
+SpeedX = rul.SpeedX;
+KickForward = rul.KickForward;    
+SpeedR = rul.SpeedR;
+KickUp = rul.KickUp;
 
 global Rules;
-%% Проверки управления.
-% <100
+%% Control range check.
 if isnan(SpeedX)
-    SpeedX=0;
+    SpeedX = 0;
 end
 if isnan(SpeedY)
-    SpeedY=0;
+    SpeedY = 0;
 end
-if (abs(SpeedX)>100)
-    SpeedX=sign(SpeedX)*100;
+if isnan(SpeedR)
+    SpeedR = 0;
 end
-if (abs(SpeedY)>100)
-    SpeedY=sign(SpeedY)*100;
+if (abs(SpeedX) > 100)
+    SpeedX = sign(SpeedX) * 100;
 end
-% Округление
-SpeedX=fix(SpeedX);
-SpeedY=fix(SpeedY);
-%% Передача управления
+if (abs(SpeedY) > 100)
+    SpeedY = sign(SpeedY) * 100;
+end
+if (abs(SpeedR) > 100)
+    SpeedY = sign(SpeedR) * 100;
+end
+
+%% Make controls integer numbers
+SpeedX = fix(SpeedX);
+SpeedY = fix(SpeedY);
+SpeedR = fix(SpeedR);
+%% Loading controls to Rules array
 global RP;
-if isempty(RP) || (RP.Pause==1)
+if isempty(RP) || (RP.Pause == 1)
     return
 end
-Rules(Num,1) = 1;
-Rules(Num,2) = Num;
-Rules(Num,3) = SpeedY;
-Rules(Num,4) = SpeedX;
-Rules(Num,5) = Kick;
-Rules(Num,6) = Sound;
-Rules(Num,7) = Sensor;
-
- 
+Rules(Num, 1) = 1;
+Rules(Num, 2) = Num;
+Rules(Num, 3) = SpeedY;
+Rules(Num, 4) = SpeedX;
+Rules(Num, 5) = KickForward;
+Rules(Num, 6) = SpeedR;
+Rules(Num, 7) = KickUp;
