@@ -48,7 +48,7 @@ if isempty(RP)
     RP.inpair=false;    
 end
 if isfield(RP,'zMain_End') && (RP.zMain_End==false) && (RP.inpair==false)
-    fprintf('<RP>: main if FAIL!\n');
+    %fprintf('<RP>: main if FAIL!\n');
 end
 RP.zMain_End=false;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -66,15 +66,33 @@ global Balls;
 if isempty(Balls)   
     Balls=zeros(1, 3);  
 end
+% --- FieldInfo ---
+global FieldInfo;
+if isempty(FieldInfo)
+    FieldInfo=zeros(1, 2);
+end
+% --- Referee ---
+global RefState
+if isempty(RefState)
+	RefState = 0
+end
+global RefCommandForTeam
+if isempty(RefCommandForTeam)
+	RefCommandForTeam = 0
+end
+global RefPartOfFieldLeft
+if isempty(RefPartOfFieldLeft)
+	RefPartOfFieldLeft = 0
+end
 % --- Blues ----
 global Blues;
 if isempty(Blues)
-    Blues=zeros(16, 4);
+    Blues=zeros(16, 5);
 end
 % --- Yellows ----
 global Yellows;
 if isempty(Yellows)
-   Yellows=zeros(16, 4);
+   Yellows=zeros(16, 5);
 end
 % --- Rules для BT ---
 global Rules;
@@ -223,6 +241,7 @@ for i=1:size(Blues,1)
         RP.Blue(i).x=Blues(i,2);       
         RP.Blue(i).y=Blues(i,3);
         RP.Blue(i).ang=Blues(i,4);
+        RP.Blue(i).isBallInside=Blues(i, 5);
         RP.Blue(i).v=RP.BluesSpeed(i);
         RP.Blue(i).u=RP.BluesAngSpeed(i);                    
         RP.Blue(i).id=i;
@@ -253,7 +272,8 @@ for i=1:size(Yellows,1)
         RP.Yellow(i).z=Yellows(i,2:3);
         RP.Yellow(i).x=Yellows(i,2);
         RP.Yellow(i).y=Yellows(i,3);
-        RP.Yellow(i).ang=Yellows(i,4);            
+        RP.Yellow(i).ang=Yellows(i,4);   
+        RP.Yellow(i).isBallInside=Yellows(i,5);
         RP.Yellow(i).v=RP.YellowsSpeed(i);
         RP.Yellow(i).u=RP.YellowsAngSpeed(i);        
         RP.Yellow(i).Nrul=RP.pair.Yellows(i);
