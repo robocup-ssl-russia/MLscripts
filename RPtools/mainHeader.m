@@ -12,13 +12,13 @@
 %       BluesSpeed: [12x1 double] %Скорости Синих
 %       BallsSpeed: 0             %Скорость мяча
 %         Ballsang: 0             %Угол направления мяча
-%            Blues: [12x4 double] %Входящий массив синих
-%          Yellows: [12x4 double] %Входящий массив жёлтых
+%            Blues: [16x4 double] %Входящий массив синих
+%          Yellows: [16x4 double] %Входящий массив жёлтых
 %            Balls: [0 0 0]       %Входящий массив мячей
-%            Rules: [4x7 double]  %Исходящий массив управления
+%            Rules: [16x13 double]  %Исходящий массив управления
 %             Ball: [1x1 struct]  %Структура мяча
-%             Blue: [1x12 struct] %Структура синих
-%           Yellow: [1x12 struct] %Структура жёлтых
+%             Blue: [1x16 struct] %Структура синих
+%           Yellow: [1x16 struct] %Структура жёлтых
 %            Pause: 0             %Пауза
 %
 % Описание структуры агентов RP.Blue(N) или RP.Yellow(N)
@@ -52,28 +52,39 @@ if isfield(RP,'zMain_End') && (RP.zMain_End==false) && (RP.inpair==false)
 end
 RP.zMain_End=false;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%experimential part----------------------------------------
+global outBuffer;
+if isempty(outBuffer)
+    outBuffer = zeros(1, 16);
+end
+%----------------------------------------------------------
 %% Data %%
 emptyrul=Crul(0,0,0,0,0);
 %от SSL
 % --- Balls ----
 global Balls;
 if isempty(Balls)   
-    Balls=zeros(1,3);  
+    Balls=zeros(1, 3);  
 end
 % --- Blues ----
 global Blues;
 if isempty(Blues)
-    Blues=zeros(12,4);
+    Blues=zeros(16, 4);
 end
-% --- Blues ----
+% --- Yellows ----
 global Yellows;
 if isempty(Yellows)
-   Yellows=zeros(12,4);
+   Yellows=zeros(16, 4);
 end
 % --- Rules для BT ---
 global Rules;
 if isempty(Rules)
-    Rules=zeros(4,7);
+    Rules=zeros(16, 13);
+end
+
+global activeAlgorithm
+if isempty(activeAlgorithm)
+    activeAlgorithm = 0;
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Разбор входящих данных %%
@@ -215,6 +226,7 @@ for i=1:size(Blues,1)
         RP.Blue(i).v=RP.BluesSpeed(i);
         RP.Blue(i).u=RP.BluesAngSpeed(i);                    
         RP.Blue(i).id=i;
+%       RP.Blue(i).Nrul=7;
         RP.Blue(i).Nrul=RP.pair.Blues(i);
         RP.Blue(i).rul=emptyrul;
         RP.Blue(i).KickAng=0;

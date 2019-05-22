@@ -11,6 +11,7 @@ else
 end
 zMain_End=RP.zMain_End;
 
+%{
 for i=1:12
     if isempty(find(Rules(:,2)==i,1))
         for j=1:12
@@ -24,6 +25,11 @@ for i=1:12
         end
     end
 end
+%}
+for i = 1 : 16
+    Rule(i, RP.Blue(i));
+end
+
 global Modul;
 if (norm(Rules)==0 && isempty(Modul)) 
     fprintf('Rules is clear! Use ''pairStart()''.\n');

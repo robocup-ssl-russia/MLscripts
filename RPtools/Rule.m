@@ -1,69 +1,87 @@
-%Rule(Nom,Left,Right,Kick,Sound,Sensor)
-%Rule(Nom,Left,Right,Kick,Sound), Sensor=0;
-%Rule(Nom,Agent) - recommended
-%Rule(Nom,rul) 
-%Размещение нового управления в массиве Rules
-%Добавление 1ого елемента   [1,*,*,...]
+%Rule(Nom, Agent) - recommended
+%Rule(Nom, rul) 
+%Adding new control to Rules array
 
-function Rule(Nom,Left,Right,Kick,Sound,Sensor)
-if (nargin==5)
-    Sensor=0;
-end
-if (nargin==2)
-    if isfield(Left,'rul')
-        rul=Left.rul;
-    else
-        rul=Left;
-    end
-    Left=rul.left;
-    Right=rul.right;
-    Kick=rul.kick;    
-    Sound=rul.sound;
-    Sensor=rul.sensor;
+function Rule(Num, Agent)
+if isfield(Agent, 'rul')
+    rul = Agent.rul;
 else
-    %warning('<RP>: old definition Rule(Nom,Left,Right,Kick,Sound,Sensor), not recommended');
-    if (isstruct(Left))
-        error('error using return of function ''Left=rul''. Using rul=funct() and Rule(Nom,rul)');
-    end
+    rul = Agent;
 end
+SpeedY = rul.SpeedY;
+SpeedX = rul.SpeedX;
+KickForward = rul.KickForward;    
+SpeedR = rul.SpeedR;
+KickUp = rul.KickUp;
+KickVoltage = rul.KickVoltage;
+EnableSpinner = rul.EnableSpinner;
+AutoKick = rul.AutoKick;
+Beep = rul.Beep;
+SpinnerSpeed = rul.SpinnerSpeed;
+KickerCharge = rul.KickerCharge;
 
 global Rules;
-RulesI=1;
-Rules_length=size(Rules,1);
-
-%% Поиск свободной строки
-while ((RulesI<=Rules_length)&&((Rules(RulesI,1)>0)||((Rules(RulesI,1)==1)&&(Rules(RulesI,2)~=Nom))))
-    RulesI=RulesI+1;
+%% Control range check.
+if isnan(SpeedX)
+    SpeedX = 0;
+end
+if isnan(SpeedY)
+    SpeedY = 0;
+end
+if isnan(SpeedR)
+    SpeedR = 0;
+end
+if (abs(SpeedX) > 100)
+    SpeedX = sign(SpeedX) * 100;
+end
+if (abs(SpeedY) > 100)
+    SpeedY = sign(SpeedY) * 100;
+end
+if (abs(SpeedR) > 100)
+    SpeedY = sign(SpeedR) * 100;
+end
+if (KickVoltage < 0)
+    KickVoltage = 0;
+end
+if (abs(KickVoltage) > 15)
+    KickVoltage = 15;
+end
+if (SpinnerSpeed < 0)
+    SpinnerSpeed = 0;
+end
+if (abs(SpinnerSpeed) > 15)
+    SpinnerSpeed = 15;
+end
+if (AutoKick < 0)
+    AutoKick = 0;
+end
+if (abs(AutoKick) > 2)
+    AutoKick = 0;
 end
 
-%% Проверки управления.
-% <100
-if isnan(Right)
-    Right=0;
-end
-if isnan(Left)
-    Left=0;
-end
-if (abs(Right)>100)
-    Right=sign(Right)*100;
-end
-if (abs(Left)>100)
-    Left=sign(Left)*100;
-end
-% Округление
-Right=fix(Right);
-Left=fix(Left);
-%% Передача управления
+%% Make controls integer numbers
+SpeedX = fix(SpeedX);
+SpeedY = fix(SpeedY);
+SpeedR = fix(SpeedR);
+SpinnerSpeed = fix(SpinnerSpeed);
+AutoKick = fix(AutoKick);
+KickVoltage = fix(KickVoltage);
+
+%% Loading controls to Rules array
 global RP;
-if isempty(RP) || (RP.Pause==1)
+if isempty(RP) || (RP.Pause == 1)
     return
 end
-    Rules(RulesI,1)=1;
-    Rules(RulesI,2)=Nom;
-    Rules(RulesI,3)=Left;
-    Rules(RulesI,4)=Right;
-    Rules(RulesI,5)=Kick;
-    Rules(RulesI,6)=Sound;
-    Rules(RulesI,7)=Sensor;
-
- 
+Rules(Num, 1) = 1;
+Rules(Num, 2) = Num;
+Rules(Num, 3) = SpeedY;
+Rules(Num, 4) = SpeedX;
+Rules(Num, 5) = KickForward;
+Rules(Num, 6) = SpeedR;
+Rules(Num, 7) = KickUp;
+Rules(Num, 8) = AutoKick;
+Rules(Num, 9) = KickVoltage;
+Rules(Num, 10) = EnableSpinner;
+Rules(Num, 11) = SpinnerSpeed;
+Rules(Num, 12) = KickerCharge;
+Rules(Num, 13) = Beep;
