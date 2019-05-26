@@ -40,14 +40,6 @@ zMain_End=RP.zMain_End;
 %{
 robots = [8, 7, 1, 4, 3, 2];
 
-%{
-for k = robots
-    RP.Blue(k).Nrul = k;
-end
-%}
-RP.Blue(robots(1)).Nrul = robots(1);
-RP.Blue(robots(2)).Nrul = robots(2);
-
 R = 400;
 obst = zeros(numel(robots), 3);
 for k = 1: numel(robots)
@@ -163,14 +155,15 @@ switch activeAlgorithm
         %G = [-1900, 0];
         %[RP.Blue(8).rul, RP.Blue(5).rul, RP.Blue(3).rul] = goBaseStateForGoalKeeperAgainstTwoAttakers(RP.Blue(8), RP.Blue(5), RP.Blue(3), G, V);
         minSpeed = 15;
-        P = 4/750;
-        D = -1.5;
-        vicinity = 50;
+        P = 1/2000;
+        D = 0;
+        vicinity = 100;
             
-        RP.Blue(3).rul = MoveToPD(RP.Blue(3), G1 + 150 * V, minSpeed, P, D, vicinity);
+        %RP.Blue(3).rul = Crul(20, 0,0,0,0);
         RP.Blue(2).rul = MoveToPD(RP.Blue(2), G1 + 600 * V, minSpeed, P, D, vicinity);
-        RP.Blue(7).rul = MoveToPD(RP.Blue(7), G2 - 150 * V, minSpeed, P, D, vicinity);
-        RP.Blue(8).rul = MoveToPD(RP.Blue(8), G2 - 600 * V, minSpeed, P, D, vicinity);
+		%RP.Blue(2).rul.SpeedX = -RP.Blue(2).rul.SpeedX;
+        %RP.Blue(7).rul = MoveToPD(RP.Blue(7), G2 - 150 * V, minSpeed, P, D, vicinity);
+        %RP.Blue(8).rul = MoveToPD(RP.Blue(8), G2 - 600 * V, minSpeed, P, D, vicinity);
         
 %         
  %       RP.Blue(3).rul = MoveToPD(RP.Blue(1), G1 , minSpeed, P, D, vicinity);
@@ -296,14 +289,6 @@ switch activeAlgorithm
     otherwise
         RP.Blue(4).rul = Crul(0, 0, 0, 0, 0);
         RP.Blue(7).rul = Crul(0, 0, 0, 0, 0);
-end
-
-dex = 1.5;
-rob = [2 3 8];
-for r = rob
-    RP.Blue(r).rul.left = RP.Blue(r).rul.left / dex;
-    RP.Blue(r).rul.right = RP.Blue(r).rul.right / dex;
-    RP.Blue(r).rul.sound = RP.Blue(r).rul.sound / dex;
 end
 
 %RP.Blue(4).rul = GoalKeeperOnLine(RP.Blue(4), RP.Ball, G, V);

@@ -10,7 +10,7 @@
 % Function place control signals to special structure ready for copying
 % to robot structure.
 % RP.Blue[N].rul = rul
-function rul = Crul(SpeedY, SpeedX, KickForward, SpeedR, KickUp, AutoKick, KickVoltage, EnableSpinner, SpinnerSpeed, KickerCharge, Beep)
+function rul = Crul(SpeedX, SpeedY, KickForward, SpeedR, KickUp, AutoKick, KickVoltage, EnableSpinner, SpinnerSpeed, KickerCharge, Beep)
 
 if (nargin == 5)
     AutoKick = 0;

@@ -74,8 +74,8 @@ if isempty(RP) || (RP.Pause == 1)
 end
 Rules(Num, 1) = 1;
 Rules(Num, 2) = Num;
-Rules(Num, 3) = SpeedY;
-Rules(Num, 4) = SpeedX;
+Rules(Num, 3) = SpeedX;
+Rules(Num, 4) = SpeedY;
 Rules(Num, 5) = KickForward;
 Rules(Num, 6) = SpeedR;
 Rules(Num, 7) = KickUp;
